@@ -1,0 +1,1 @@
+# WinScout\nWinning products found by AI every day. Website: https://talhaakhtar257-ai.github.io/winning-product-/
