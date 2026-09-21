@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://talhaakhtar257-ai.github.io/winning-product-/sitemap.xml
