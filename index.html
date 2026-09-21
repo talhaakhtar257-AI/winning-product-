@@ -4,136 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>WinScout — Winning Product Radar</title>
-<meta name="description" content="Winning e-commerce products found by AI every day, for Global and Pakistan markets. Scores, prices, competition and video ad ideas.">
+<meta name="description" content="Winning e-commerce products found by AI every day, for Global and Pakistan sellers. Photos, scores, prices, competition, supplier links and video ad ideas.">
 <meta property="og:title" content="WinScout — Winning Product Radar">
 <meta property="og:description" content="Fresh winning products found by AI every day, for Global and Pakistan sellers.">
+<meta name="referrer" content="no-referrer">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
-<style>
-:root{
-color-scheme: light dark;
---bg:#F3F5F1; --surface:#FFFFFF; --surface-2:#E9EDE6; --ink:#15201B; --ink-2:#4B5A52; --ink-3:#6F7C74; --line:#D8DED5;
---accent:#E9A91E; --accent-ink:#8A5A00; --accent-soft:#FBEFD2;
---good:#2E7D4F; --good-soft:#DFF0E5; --warn:#A96300; --warn-soft:#FBEBD0; --bad:#B8432F; --bad-soft:#F7E0DA;
---global:#2F5FA8; --global-soft:#E2EAF6; --pk:#0B6B55; --pk-soft:#DBEEE8;
---pick-bg:#15201B; --pick-ink:#F3F5F1; --pick-accent:#F0B53A;
---shadow:0 1px 2px rgba(20,32,27,.05),0 6px 20px rgba(20,32,27,.06);
---display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
---body:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
---mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-@media (prefers-color-scheme: dark){
-:root{
---bg:#0E1512; --surface:#161F1B; --surface-2:#202B26; --ink:#E6ECE8; --ink-2:#A9B6AF; --ink-3:#86938C; --line:#2B3731;
---accent:#F0B53A; --accent-ink:#F6C865; --accent-soft:#3A2E12;
---good:#62C891; --good-soft:#15301F; --warn:#F0A94A; --warn-soft:#352711; --bad:#EE8570; --bad-soft:#3A1D17;
---global:#8DB3F0; --global-soft:#16243A; --pk:#5CC9A7; --pk-soft:#11302A;
---pick-bg:#26332D; --pick-ink:#E6ECE8;
---shadow:0 1px 2px rgba(0,0,0,.3);
-}
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);margin:0;padding-top:env(safe-area-inset-top,0px)}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:0 40px}
-@media (max-width:520px){.wrap{padding-inline:16px}}
-a{color:inherit}
-button,input,select{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
-h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
-.muted{color:var(--ink-2)}
-.faint{color:var(--ink-3)}
-.label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-[hidden]{display:none!important}
-.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top-in{max-width:1180px;margin:0 auto;padding-inline:20px;display:flex;align-items:center;gap:14px;min-height:62px;flex-wrap:wrap}
-@media (max-width:520px){.top-in{padding-inline:16px}}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
-.brand b{font-family:var(--display);font-size:22px;font-weight:800;display:block;line-height:1.1}
-.brand small{display:block;font-size:12px;color:var(--ink-3);font-weight:500}
-.radar{width:34px;height:34px;flex:none}
-.radar .sweep{transform-origin:17px 17px;animation:spin 4s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.radar .sweep,.pulse{animation:none!important}}
-.updated{font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:8px}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 var(--good);animation:pulse 2s infinite;flex:none}
-@keyframes pulse{70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.hero{padding-top:30px;display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
-.hero h1{font-size:clamp(28px,4.6vw,44px);font-weight:800;line-height:1.05;max-width:18ch}
-.hero h1 em{font-style:normal;color:var(--accent-ink)}
-.hero p{margin:10px 0 0;max-width:56ch}
-.hero .actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:9px;cursor:pointer;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;text-decoration:none}
-.btn:hover{border-color:var(--ink-3)}
-.btn.small{padding:5px 10px;font-size:13px;border-radius:7px}
-.btn[aria-pressed="true"],.btn.saved{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
-input[type=search],select{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:8px 11px;min-width:0}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
-.stat{padding:14px 18px;border-left:1px solid var(--line)}
-.stat:first-child{border-left:0}
-.stat b{display:block;font-family:var(--mono);font-size:24px;font-weight:600;line-height:1.2;margin-top:2px;font-variant-numeric:tabular-nums}
-@media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
-.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
-.seg{display:inline-flex;background:var(--surface-2);border-radius:10px;padding:3px}
-.seg button{border:0;background:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13.5px;color:var(--ink-2)}
-.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
-.filters input[type=search]{flex:1 1 200px}
-.chips-row{display:flex;gap:6px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:thin}
-.nchip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;color:var(--ink-2)}
-.nchip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
-.nchip span{font-family:var(--mono);font-size:11px;opacity:.7;margin-left:4px}
-.picks{margin-top:26px}
-.picks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px;margin-top:10px}
-.pick{background:var(--pick-bg);color:var(--pick-ink);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;cursor:pointer;border:0;text-align:left;font:inherit}
-.pick .rank{font-family:var(--mono);font-size:12px;color:var(--pick-accent)}
-.pick h3{font-size:18px;line-height:1.2}
-.pick .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;font-size:13px;opacity:.85}
-.pick .big{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--pick-accent);line-height:1}
-.group{margin-top:30px}
-.group-h{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
-.group-h h2{font-size:21px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px;margin-top:14px;align-items:start}
-.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;white-space:nowrap}
-.pill.Global{background:var(--global-soft);color:var(--global)}
-.pill.Pakistan{background:var(--pk-soft);color:var(--pk)}
-.c-good{background:var(--good-soft);color:var(--good)}
-.c-warn{background:var(--warn-soft);color:var(--warn)}
-.c-bad{background:var(--bad-soft);color:var(--bad)}
-.c-plain{background:var(--surface-2);color:var(--ink-2)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-margin-top:90px}
-.card.flash{outline:2px solid var(--accent)}
-.card-top{display:flex;gap:12px;align-items:flex-start}
-.card-top .tt{flex:1;min-width:0}
-.card h3{font-size:18px;line-height:1.2;margin:4px 0 2px;overflow-wrap:anywhere}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.ring{--v:0;--c:var(--accent);width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--v)*1%),var(--surface-2) 0);display:grid;place-items:center;flex:none}
-.ring>span{width:46px;height:46px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:17px}
-.tier{font-size:11px;font-weight:700;text-align:center;margin-top:4px;letter-spacing:.04em;text-transform:uppercase}
-.econ{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--surface-2);border-radius:10px}
-.econ div{padding:8px 10px;min-width:0}
-.econ div+div{border-left:1px solid var(--line)}
-.econ b{display:block;font-family:var(--mono);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.why{font-size:14px}
-details.more summary{cursor:pointer;font-weight:600;font-size:13.5px;color:var(--ink-2);list-style:none;display:flex;align-items:center;gap:6px}
-details.more summary::-webkit-details-marker{display:none}
-details.more summary::before{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
-details.more[open] summary::before{transform:rotate(45deg)}
-.more-body{display:grid;gap:10px;padding-top:12px;font-size:13.5px}
-.more-body b{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.links a{font-size:12.5px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:3px 8px;color:var(--ink-2)}
-.links a:hover{border-color:var(--ink-3);color:var(--ink)}
-.card-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:10px;font-size:12.5px;color:var(--ink-3)}
-.empty{text-align:center;padding:56px 20px}
-.empty h2{font-size:24px;margin-bottom:6px}
-footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-</style>
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 <header class="top">
-<div class="top-in">
+<div class="wrap top-in">
 <a class="brand" href="./">
 <svg class="radar" viewBox="0 0 34 34" aria-hidden="true">
 <circle cx="17" cy="17" r="16" fill="#15201B"/>
@@ -142,245 +25,73 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font-si
 <path class="sweep" d="M17 17 L17 1 A16 16 0 0 1 30.9 9 Z" fill="#F0B53A" fill-opacity=".85"/>
 <circle cx="23" cy="11.5" r="2" fill="#F0B53A"/>
 </svg>
-<span><b>WinScout</b><small>Winning product radar</small></span>
+<b>WinScout</b>
 </a>
-<span class="updated" id="updated"><span class="pulse"></span>Loading…</span>
+<nav class="nav"><a href="#products">Products</a><a href="#how">How it works</a></nav>
+<button class="btn small" id="savedOnly" aria-pressed="false">★ Saved <span id="savedCount"></span></button>
 </div>
 </header>
+
 <main class="wrap">
 <section class="hero">
 <div>
-<h1>Today's <em>winning products</em>, found by AI</h1>
-<p class="muted">Every day our AI searches Amazon, TikTok Shop, Daraz and trend reports, then scores each product on demand, profit, competition and more. For sellers in the <b>Global</b> and <b>Pakistan</b> markets.</p>
+<span class="eyebrow"><span class="pulse"></span><span id="updated">Loading today's hunt…</span></span>
+<h1>Find your next <em>winning product</em> before everyone else</h1>
+<p>Every day our AI searches Amazon, TikTok Shop, Daraz and trend reports, then scores each product on demand, profit, competition and more — for Global and Pakistan sellers.</p>
 </div>
-<div class="actions">
-<button class="btn" id="savedOnly" aria-pressed="false">★ Saved <span id="savedCount"></span></button>
-<button class="btn" id="csv">Download CSV</button>
+<div class="hstats" id="stats">
+<div class="hstat"><span>Products</span><b>—</b></div>
+<div class="hstat"><span>Winners 80+</span><b class="gold">—</b></div>
+<div class="hstat"><span>Niches</span><b>—</b></div>
+<div class="hstat"><span>Best score</span><b>—</b></div>
 </div>
 </section>
-<div class="stats" id="stats"></div>
-<div class="filters">
+
+<section class="controls" id="products">
+<div class="row">
 <div class="seg" role="group" aria-label="Market" id="marketSeg">
 <button data-m="all" aria-pressed="true">Both</button>
-<button data-m="Global" aria-pressed="false">Global</button>
-<button data-m="Pakistan" aria-pressed="false">Pakistan</button>
+<button data-m="Global" aria-pressed="false">🌍 Global</button>
+<button data-m="Pakistan" aria-pressed="false">🇵🇰 Pakistan</button>
 </div>
-<select id="day" aria-label="Hunt date"></select>
+<input type="search" id="q" placeholder="Search products…" aria-label="Search products">
 <select id="sort" aria-label="Sort">
-<option value="score">Sort: best score</option>
-<option value="markup">Sort: biggest markup</option>
-<option value="competition">Sort: lowest competition</option>
-<option value="new">Sort: newest</option>
+<option value="score">Best score</option>
+<option value="markup">Biggest markup</option>
+<option value="competition">Lowest competition</option>
+<option value="price">Lowest price</option>
+<option value="new">Newest</option>
 </select>
-<input type="search" id="q" placeholder="Search products…">
+<button class="btn" id="toggleFilters" aria-expanded="false">Filters <span id="fcount"></span></button>
+</div>
+<div class="more-filters" id="filters" hidden>
+<label for="day">Date <select id="day"></select></label>
+<label for="verdict">Verdict <select id="verdict"><option value="all">Any</option><option>Winner</option><option>Promising</option><option>Weak</option></select></label>
+<label for="trend">Trend <select id="trend"><option value="all">Any</option><option>Hot</option><option>Rising</option><option>Stable</option><option>Falling</option></select></label>
+<label for="comp">Competition <select id="comp"><option value="all">Any</option><option>Low</option><option>Medium</option><option>High</option></select></label>
+<label for="markup">Markup <select id="markup"><option value="0">Any</option><option value="2">2× or more</option><option value="3">3× or more</option><option value="5">5× or more</option></select></label>
+<label for="photo"><input type="checkbox" id="photo"> With photo only</label>
+<button class="btn ghost small" id="clear">Clear filters</button>
 </div>
 <div class="chips-row" id="niches" role="group" aria-label="Niche"></div>
+</section>
+
+<div class="resultline"><span class="muted" id="count"></span><button class="btn small" id="csv">Download CSV</button></div>
 <div id="list"></div>
+
+<section class="how" id="how">
+<div class="step"><div class="n">Step 1</div><h3>Search</h3><p class="muted">Each morning the AI searches the web for best sellers in each niche, for Global and Pakistan.</p></div>
+<div class="step"><div class="n">Step 2</div><h3>Score</h3><p class="muted">Every product is scored 0–10 on demand, profit, competition, wow factor, reviews, shipping, price and safety.</p></div>
+<div class="step"><div class="n">Step 3</div><h3>Filter</h3><p class="muted">Weak products and repeats from the last 7 days are skipped. Only the best reach this page.</p></div>
+<div class="step"><div class="n">Step 4</div><h3>You sell</h3><p class="muted">Open the supplier link, check the real price, and test the product with the video ad idea.</p></div>
+</section>
+
 <footer>
 <span>Prices are AI estimates from public web results — always check the supplier before you buy stock.</span>
-<span>WinScout · updated daily</span>
+<span>WinScout · updated every morning</span>
 </footer>
 </main>
-<script>
-(() => {
-const S = { all: [], market: "all", niche: "all", day: "latest", sort: "score", q: "", savedOnly: false, saved: new Set(), open: new Set() };
-const $ = s => document.querySelector(s);
-const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const num = v => { const n = typeof v === "number" ? v : parseFloat(v); return isFinite(n) ? n : null; };
-const safeUrl = u => { try { const x = new URL(String(u)); return /^https?:$/.test(x.protocol) ? x.href : null; } catch { return null; } };
-const keyOf = p => [p.date, p.market, p.niche, p.name].join("|");
-try { S.saved = new Set(JSON.parse(localStorage.getItem("winscout-saved") || "[]")); } catch {}
-const persist = () => { try { localStorage.setItem("winscout-saved", JSON.stringify([...S.saved])); } catch {} };
-function money(n, cur){
-n = num(n); if (n === null || n === 0) return "—";
-if (cur === "PKR") return "Rs " + Math.round(n).toLocaleString("en-US");
-return "$" + (n >= 100 ? Math.round(n).toLocaleString("en-US") : n.toFixed(2));
-}
-function niceDate(d, long){
-const x = new Date(d + "T00:00:00"); if (isNaN(x)) return d || "—";
-return x.toLocaleDateString("en-GB", long ? {weekday:"long", day:"numeric", month:"long"} : {weekday:"short", day:"numeric", month:"short"});
-}
-function tier(s){
-if (s >= 80) return {label:"Winner", ring:"var(--accent)", text:"var(--accent-ink)"};
-if (s >= 65) return {label:"Promising", ring:"var(--ink-2)", text:"var(--ink-2)"};
-return {label:"Weak", ring:"var(--bad)", text:"var(--bad)"};
-}
-function markup(p){ const m = num(p.markup); if (m) return m; const c = num(p.cost), pr = num(p.price); return c && pr ? pr / c : null; }
-function compChip(c){
-const v = String(c || "").toLowerCase();
-if (v.startsWith("low")) return '<span class="pill c-good">Low competition</span>';
-if (v.startsWith("med")) return '<span class="pill c-warn">Medium competition</span>';
-if (v.startsWith("high")) return '<span class="pill c-bad">High competition</span>';
-return "";
-}
-function trendChip(t){
-if (!t) return "";
-const v = String(t).toLowerCase();
-const cls = /hot|ris/.test(v) ? "c-good" : /fall/.test(v) ? "c-bad" : "c-plain";
-return `<span class="pill ${cls}">Trend: ${esc(t)}</span>`;
-}
-function searchLinks(kw, market){
-const k = encodeURIComponent(kw || ""); if (!k) return "";
-const L = market === "Pakistan"
-? [["Daraz",`https://www.daraz.pk/catalog/?q=${k}`],["AliExpress",`https://www.aliexpress.com/wholesale?SearchText=${k}`],["TikTok",`https://www.tiktok.com/search?q=${k}`],["Google Trends",`https://trends.google.com/trends/explore?geo=PK&q=${k}`]]
-: [["AliExpress",`https://www.aliexpress.com/wholesale?SearchText=${k}`],["Amazon",`https://www.amazon.com/s?k=${k}`],["TikTok",`https://www.tiktok.com/search?q=${k}`],["Google Trends",`https://trends.google.com/trends/explore?q=${k}`]];
-return L.map(([n,u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${n} ↗</a>`).join("");
-}
-/* which products are in view (before niche/search filters) */
-function scope(){
-let list = S.all;
-if (S.day === "latest"){
-const latest = {};
-for (const p of list){ const k = p.market + "|" + p.niche; if (!latest[k] || p.date > latest[k]) latest[k] = p.date; }
-list = list.filter(p => latest[p.market + "|" + p.niche] === p.date);
-} else if (S.day !== "all") {
-list = list.filter(p => p.date === S.day);
-}
-if (S.market !== "all") list = list.filter(p => p.market === S.market);
-if (S.savedOnly) list = S.all.filter(p => S.saved.has(p.key) && (S.market === "all" || p.market === S.market));
-return list;
-}
-function visible(base){
-const q = S.q.trim().toLowerCase();
-let list = base.filter(p => (S.niche === "all" || p.niche === S.niche) &&
-(!q || [p.name, p.niche, p.why, p.keyword].join(" ").toLowerCase().includes(q)));
-const rank = c => { const v = String(c||"").toLowerCase(); return v.startsWith("low") ? 0 : v.startsWith("med") ? 1 : v.startsWith("high") ? 2 : 3; };
-if (S.sort === "markup") list.sort((a,b) => (markup(b)||0) - (markup(a)||0) || b.score - a.score);
-else if (S.sort === "competition") list.sort((a,b) => rank(a.competition) - rank(b.competition) || b.score - a.score);
-else if (S.sort === "new") list.sort((a,b) => b.date.localeCompare(a.date) || b.score - a.score);
-else list.sort((a,b) => b.score - a.score);
-return list;
-}
-function card(p){
-const t = tier(p.score), m = markup(p), saved = S.saved.has(p.key), src = safeUrl(p.source);
-const kv = [["Who buys it", p.audience], ["Video ad idea", p.adIdea], ["Where to sell", p.whereToSell], ["Watch out", p.risk], ["Score details", p.scoreDetails]]
-.filter(([,v]) => v).map(([k,v]) => `<div><b>${k}</b>${esc(v)}</div>`).join("");
-return `<article class="card" id="c-${esc(p.id)}">
-<div class="card-top">
-<div class="tt">
-<div class="chips"><span class="pill ${esc(p.market)}">${esc(p.market)}</span><span class="pill c-plain">${esc(p.niche)}</span></div>
-<h3>${esc(p.name)}</h3>
-<div class="faint" style="font-size:12.5px">Found ${esc(niceDate(p.date))}</div>
-</div>
-<div><div class="ring" style="--v:${p.score};--c:${t.ring}" role="img" aria-label="Score ${p.score} out of 100"><span>${p.score}</span></div><div class="tier" style="color:${t.text}">${t.label}</div></div>
-</div>
-<div class="econ">
-<div><span class="label">Cost</span><b>${money(p.cost, p.currency)}</b></div>
-<div><span class="label">Sell at</span><b>${money(p.price, p.currency)}</b></div>
-<div><span class="label">Markup</span><b>${m ? m.toFixed(1) + "×" : "—"}</b></div>
-</div>
-<div class="chips">${compChip(p.competition)}${trendChip(p.trend)}</div>
-${p.why ? `<div class="why">${esc(p.why)}</div>` : ""}
-<details class="more" data-id="${esc(p.id)}" ${S.open.has(p.id) ? "open" : ""}>
-<summary>Buyers, ad idea and links</summary>
-<div class="more-body">
-${kv}
-<div><b>Find it</b><div class="links">${src ? `<a href="${esc(src)}" target="_blank" rel="noopener">Source ↗</a>` : ""}${searchLinks(p.keyword || p.name, p.market)}</div></div>
-</div>
-</details>
-<div class="card-foot"><span>Prices are estimates</span><button class="btn small ${saved ? "saved" : ""}" data-save="${esc(p.key)}">${saved ? "★ Saved" : "☆ Save"}</button></div>
-</article>`;
-}
-function render(){
-const base = scope();
-const list = visible(base);
-// stats
-const niches = new Set(base.map(p => p.niche));
-const best = base.length ? Math.max(...base.map(p => p.score)) : 0;
-$("#stats").innerHTML = `
-<div class="stat"><span class="label">Products</span><b>${base.length}</b></div>
-<div class="stat"><span class="label">Winners (80+)</span><b>${base.filter(p => p.score >= 80).length}</b></div>
-<div class="stat"><span class="label">Niches</span><b>${niches.size}</b></div>
-<div class="stat"><span class="label">Best score</span><b>${best || "—"}</b></div>`;
-// niche chips
-const counts = {};
-for (const p of base) counts[p.niche] = (counts[p.niche] || 0) + 1;
-if (S.niche !== "all" && !counts[S.niche]) S.niche = "all";
-$("#niches").innerHTML = `<button class="nchip" data-n="all" aria-pressed="${S.niche === "all"}">All niches<span>${base.length}</span></button>` +
-Object.keys(counts).sort().map(n => `<button class="nchip" data-n="${esc(n)}" aria-pressed="${S.niche === n}">${esc(n)}<span>${counts[n]}</span></button>`).join("");
-$("#savedCount").textContent = S.saved.size ? S.saved.size : "";
-$("#savedOnly").setAttribute("aria-pressed", S.savedOnly);
-let h = "";
-if (!list.length){
-h = S.savedOnly
-? `<div class="empty"><h2>No saved products yet</h2><p class="muted">Press ☆ Save on any product to keep it here (saved in this browser).</p></div>`
-: `<div class="empty"><h2>Nothing matches</h2><p class="muted">Try another market, date, niche or search word.</p></div>`;
-} else if (S.niche === "all" && !S.q.trim() && !S.savedOnly && S.sort === "score"){
-const top = list.slice(0, 4);
-h += `<section class="picks"><div class="label">Top picks</div><div class="picks-grid">${top.map((p,i) => `
-<button class="pick" data-jump="${esc(p.id)}">
-<span class="rank">#${i+1} · ${esc(p.market)} · ${esc(p.niche)}</span>
-<h3>${esc(p.name)}</h3>
-<span class="meta"><span>${money(p.cost,p.currency)} → ${money(p.price,p.currency)}</span><span class="big">${p.score}</span></span>
-</button>`).join("")}</div></section>`;
-const groups = new Map();
-for (const p of list){ if (!groups.has(p.niche)) groups.set(p.niche, []); groups.get(p.niche).push(p); }
-for (const [n, ps] of groups){
-h += `<section class="group"><div class="group-h"><h2>${esc(n)}</h2><span class="faint">${ps.length} products · hunted ${esc(niceDate(ps.map(x=>x.date).sort().pop()))}</span></div><div class="grid">${ps.map(card).join("")}</div></section>`;
-}
-} else {
-h = `<div class="grid" style="margin-top:20px">${list.map(card).join("")}</div>`;
-}
-$("#list").innerHTML = h;
-}
-function buildDays(){
-const days = [...new Set(S.all.map(p => p.date))].sort().reverse();
-$("#day").innerHTML = `<option value="latest">Latest hunt per niche</option><option value="all">All recent days</option>` +
-days.map(d => `<option value="${esc(d)}">${esc(niceDate(d))}</option>`).join("");
-}
-function csv(){
-const list = visible(scope());
-const head = ["Date","Market","Niche","Product","Score","Verdict","Cost","Sell price","Currency","Markup","Competition","Trend","Why it wins","Who buys it","Video ad idea","Where to sell","Risk","Search keyword","Source"];
-const cell = v => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s; };
-const rows = list.map(p => [p.date,p.market,p.niche,p.name,p.score,p.verdict,p.cost,p.price,p.currency,(markup(p)||"") && markup(p).toFixed(1),p.competition,p.trend,p.why,p.audience,p.adIdea,p.whereToSell,p.risk,p.keyword,p.source].map(cell).join(","));
-const blob = new Blob(["﻿" + [head.join(","), ...rows].join("\n")], {type:"text/csv"});
-const a = document.createElement("a");
-a.href = URL.createObjectURL(blob); a.download = `winscout-${new Date().toISOString().slice(0,10)}.csv`;
-document.body.appendChild(a); a.click(); a.remove();
-setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-}
-/* events */
-$("#marketSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.market = b.dataset.m; $("#marketSeg").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); render(); });
-$("#day").addEventListener("change", e => { S.day = e.target.value; S.savedOnly = false; render(); });
-$("#sort").addEventListener("change", e => { S.sort = e.target.value; render(); });
-$("#q").addEventListener("input", e => { S.q = e.target.value; render(); });
-$("#savedOnly").addEventListener("click", () => { S.savedOnly = !S.savedOnly; render(); });
-$("#csv").addEventListener("click", csv);
-document.addEventListener("click", e => {
-const n = e.target.closest("[data-n]"); if (n){ S.niche = n.dataset.n; render(); return; }
-const s = e.target.closest("[data-save]");
-if (s){ const k = s.dataset.save; S.saved.has(k) ? S.saved.delete(k) : S.saved.add(k); persist(); render(); return; }
-const j = e.target.closest("[data-jump]");
-if (j){ const c = document.getElementById("c-" + j.dataset.jump); if (c){ c.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"}); c.classList.add("flash"); setTimeout(() => c.classList.remove("flash"), 1600); } }
-});
-document.addEventListener("toggle", e => { const d = e.target; if (!d.matches || !d.matches("details.more")) return; d.open ? S.open.add(d.dataset.id) : S.open.delete(d.dataset.id); }, true);
-/* load data */
-fetch("products.json?v=" + Date.now(), {cache: "no-store"})
-.then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-.then(data => {
-const raw = Array.isArray(data.products) ? data.products : [];
-S.all = raw.filter(p => p && p.name).map((p, i) => {
-const x = {
-...p,
-name: String(p.name), market: p.market === "Pakistan" ? "Pakistan" : "Global",
-niche: p.niche || "Other", date: String(p.date || "").slice(0, 10),
-score: Math.max(0, Math.min(100, Math.round(num(p.score) || 0))), id: "p" + i
-};
-x.key = keyOf(x);
-return x;
-});
-const days = [...new Set(S.all.map(p => p.date))].sort();
-const last = days[days.length - 1];
-$("#updated").innerHTML = `<span class="pulse"></span>Updated ${esc(last ? niceDate(last, true) : "—")}`;
-buildDays();
-render();
-})
-.catch(() => {
-$("#updated").textContent = "Couldn't load products";
-$("#stats").hidden = true;
-$("#list").innerHTML = `<div class="empty"><h2>Products are loading soon</h2><p class="muted">The first hunt results will appear here after the next daily update. Please refresh in a few minutes.</p></div>`;
-});
-})();
-</script>
+
+<script src="app.js?v=2" defer></script>
 </body>
 </html>
