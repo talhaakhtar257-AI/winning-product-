@@ -1,0 +1,1 @@
+!function(){'use strict';var t=document.documentElement;try{var e=localStorage.getItem('ws-theme');'light'!==e&&'dark'!==e||t.setAttribute('data-theme',e)}catch(t){}if(window.top!==window.self)try{if(window.top.location.hostname!==window.location.hostname)throw new Error('x')}catch(e){t.className+=' framed'}}();
