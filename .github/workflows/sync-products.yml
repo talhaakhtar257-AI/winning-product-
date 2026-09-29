@@ -1,0 +1,50 @@
+name: Sync products to SaaS database
+
+# Every time Make.com commits a new products.json, import it into Supabase.
+# Needs repository secrets SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY;
+# skips quietly until they are set.
+on:
+  push:
+    branches: [main]
+    paths: [products.json]
+  workflow_dispatch:
+    inputs:
+      full_history:
+        description: Re-import every committed version (backfill trend history)
+        type: boolean
+        default: false
+
+concurrency:
+  group: sync-products
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - name: Check secrets
+        id: check
+        run: |
+          if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "Supabase secrets not set — skipping import."; echo "run=false" >> "$GITHUB_OUTPUT"
+          else echo "run=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.run == 'true'
+        with:
+          fetch-depth: ${{ inputs.full_history && 0 || 1 }}
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.run == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: saas/package-lock.json
+      - if: steps.check.outputs.run == 'true'
+        working-directory: saas
+        run: npm ci
+      - if: steps.check.outputs.run == 'true'
+        working-directory: saas
+        run: npm run import:products -- ${{ inputs.full_history && '--git-history' || '' }}

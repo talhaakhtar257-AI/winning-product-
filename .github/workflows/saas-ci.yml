@@ -1,0 +1,31 @@
+name: SaaS CI
+
+on:
+  pull_request:
+    paths: ['saas/**', 'products.json', '.github/workflows/saas-ci.yml']
+  push:
+    branches: [main]
+    paths: ['saas/**', '.github/workflows/saas-ci.yml']
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: saas
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: saas/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key-000000
+          SUPABASE_SERVICE_ROLE_KEY: ci-placeholder-service-key-0000
