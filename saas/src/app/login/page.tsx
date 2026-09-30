@@ -17,7 +17,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <p className="muted">New here? Signing in creates your free account — no card needed.</p>
       {sp.error === 'banned' && <div className="alert bad">This account is suspended. Contact support.</div>}
       {sp.error === 'auth' && <div className="alert bad">That sign-in link expired. Please request a new one.</div>}
-      <LoginForm next={next} signupsOpen={settings.features.signups} />
+      <LoginForm next={next} signupsOpen={settings.features.signups} emailLogin={settings.features.emailLogin} />
     </div>
   );
 }

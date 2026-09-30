@@ -3,7 +3,7 @@
 -- competitors) has NO client policies, so it can only be read by server code
 -- using the service role, after plan entitlements are checked.
 
-create extension if not exists pg_trgm;
+create extension if not exists pg_trgm with schema extensions;
 
 -- ───────────────────────── Roles & plans ─────────────────────────
 do $$ begin
@@ -153,7 +153,7 @@ create table if not exists public.products (
 );
 create index if not exists products_last_seen_idx on public.products (last_seen desc, score desc);
 create index if not exists products_market_idx on public.products (market, niche);
-create index if not exists products_name_trgm on public.products using gin (name gin_trgm_ops);
+create index if not exists products_name_trgm on public.products using gin (name extensions.gin_trgm_ops);
 
 create table if not exists public.product_snapshots (
   product_id  uuid not null references public.products (id) on delete cascade,

@@ -28,22 +28,57 @@ Free vs paid access is enforced **on the server**. Visitors cannot read the prod
 
 Roles: `owner` > `admin` > `staff` > `user`. **The first account to sign up becomes the owner.**
 
-## Setup (about 30 minutes)
+## Go-live setup (about 45 minutes)
 
-1. **Supabase.** Create a project, then run `npx supabase link --project-ref <ref>` and `npx supabase db push` (this applies `supabase/migrations`).
-   - Auth → URL configuration: set Site URL to your app URL and add `https://YOUR-APP/auth/callback` as a redirect.
-   - Optional: enable Google under Auth → Providers.
-2. **Vercel.** Import this repo and set **Root Directory = `saas`**. Add every variable from `.env.example`. The cron job in `vercel.json` runs plan expiry daily.
-3. **Sign up** on the deployed app. You are now the owner. Open **Admin → Design & settings** and fill in your brand details and your JazzCash/Easypaisa/bank accounts.
-4. **Import product history** (one time), in either of these ways:
-   - Run `npm run import:products -- --git-history` locally with the env vars set.
-   - Run the **Sync products** GitHub Action with "full history".
-5. **Daily feed.** Use either option, or both:
-   - Add repo secrets `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. Every Make.com commit to `products.json` is then imported by `.github/workflows/sync-products.yml`.
-   - Or add an HTTP module to the Make.com scenario: `POST https://YOUR-APP/api/ingest` with header `Authorization: Bearer <INGEST_SECRET>` and body `{"products":[…]}`.
-6. **Card payments** (merchant of record, which works for Pakistan-based owners):
-   - **Lemon Squeezy:** create a subscription product per plan and paste each variant ID into Admin → Plans. Add a webhook to `https://YOUR-APP/api/webhooks/lemonsqueezy` for all `subscription_*` events.
-   - **Paddle** (optional): create prices, paste the price IDs, and set a default payment link. Point notifications to `/api/webhooks/paddle`, then switch it on in Admin → Design & settings → Feature switches.
+Use the **Mumbai** region everywhere. `vercel.json` pins the app to Vercel `bom1`, so the database must be in Mumbai too. Keys go straight from Supabase into Vercel and GitHub. Never paste them into chats or commit them.
+
+1. **Create the Supabase project.**
+   - Sign in at supabase.com with the email you'll use as the WinScout owner.
+   - Click New project: name `winscout`, set a strong database password (save it in a password manager), region **South Asia (Mumbai)**, Free plan.
+2. **Create the database.**
+   - Open SQL Editor → New query.
+   - Paste all of [`supabase/migrations/20260929000000_init.sql`](https://raw.githubusercontent.com/talhaakhtar257-AI/winning-product-/main/saas/supabase/migrations/20260929000000_init.sql) and click **Run**.
+   - You should see “Success. No rows returned”.
+3. **Find your keys.** Project Settings → API Keys has the **Project URL**, the **Publishable key** and the **Secret key**. Legacy `anon` / `service_role` keys work too.
+4. **Deploy on Vercel.**
+   - At vercel.com, sign up with GitHub and click **Add New → Project**. Import `winning-product-`.
+   - Set **Root Directory = `saas`**.
+   - Add these environment variables:
+     | Variable | Value |
+     |---|---|
+     | `NEXT_PUBLIC_SUPABASE_URL` | Project URL |
+     | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Publishable key |
+     | `SUPABASE_SERVICE_ROLE_KEY` | Secret key |
+     | `NEXT_PUBLIC_SITE_URL` | `https://<project-name>.vercel.app` |
+     | `CRON_SECRET` | 32+ random characters (from a password generator) |
+   - Click **Deploy**. If Vercel gives a different domain, update `NEXT_PUBLIC_SITE_URL` and **Redeploy**.
+5. **Set auth URLs in Supabase.** Go to Authentication → URL Configuration.
+   - **Site URL** = your Vercel URL.
+   - **Redirect URLs** = `https://<your-domain>/**`
+6. **Turn on Google sign-in.** Supabase's built-in email only reaches your own team, so customers sign in with Google.
+   - In Google Cloud Console, create a project. Then open **OAuth consent screen**: choose External, set app name and support email, then **Publish app**.
+   - Go to **Credentials → Create OAuth client ID → Web application**:
+     - Authorized JavaScript origin: your Vercel URL
+     - Authorized redirect URI: `https://<project-ref>.supabase.co/auth/v1/callback`
+   - Paste the Client ID and Secret into Supabase → Authentication → Sign In / Providers → **Google** → Enable.
+7. **Become the owner.**
+   - Open your site and click **Continue with Google**. The first account becomes the owner.
+   - In **Admin → Design & settings**, fill in your brand and local payment accounts.
+   - Switch **off** “Email sign-in links” until you add custom SMTP (Supabase → Authentication → Emails → SMTP, e.g. Resend with your own domain).
+   - The **Setup checklist** on the Admin dashboard shows what's left.
+8. **Load products.**
+   - In GitHub, go to the repo's Settings → Secrets and variables → **Actions**. Add `SUPABASE_URL` (Project URL) and `SUPABASE_SERVICE_ROLE_KEY` (Secret key).
+   - Open **Actions → Sync products to SaaS database → Run workflow**, and tick **full history**.
+   - After that, every Make.com update to `products.json` syncs automatically.
+   - Alternative: call `POST /api/ingest` from Make with `Authorization: Bearer <INGEST_SECRET>` (add `INGEST_SECRET` in Vercel).
+9. **Card payments** (merchant of record, works for Pakistan-based owners):
+   - **Lemon Squeezy:** create a subscription product per plan and paste each variant ID into Admin → Plans. Add `LEMONSQUEEZY_API_KEY`, `LEMONSQUEEZY_STORE_ID` and `LEMONSQUEEZY_WEBHOOK_SECRET` in Vercel. Add a webhook to `https://<your-domain>/api/webhooks/lemonsqueezy` for all `subscription_*` events.
+   - **Paddle** (optional):
+     - Create prices, paste the price IDs, and set a default payment link.
+     - Point notifications to `/api/webhooks/paddle`.
+     - Switch it on in Admin → Design & settings → Feature switches.
+
+> **Plans and costs:** Vercel's free Hobby plan is for **non-commercial** use. Test on it, but upgrade to **Pro** before charging customers. Supabase's free plan pauses after 7 idle days; the daily product sync keeps it active.
 
 ## Develop and test
 

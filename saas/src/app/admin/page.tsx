@@ -4,6 +4,7 @@ import { hasRole } from '@/lib/entitlements';
 import { supabaseAdmin } from '@/lib/supabase/admin';
 import { fmtDate, money } from '@/lib/format';
 import { runExpiryNow } from './actions';
+import { SetupChecklist } from './SetupChecklist';
 
 interface Metrics {
   users: number; signups7: number; signups30: number; paid: number; paidBySource: Record<string, number>;
@@ -25,6 +26,9 @@ export default async function AdminDashboard() {
   return (
     <>
       <h1>Dashboard</h1>
+      {hasRole(s.profile.role, 'admin') && (
+        <SetupChecklist productCount={x.products ?? 0} lastIngestAt={x.lastIngest?.created_at ?? null} lastIngestError={x.lastIngest?.error ?? null} />
+      )}
       {x.pendingPayments > 0 && (
         <div className="alert warn row between">
           <span><strong>{x.pendingPayments}</strong> manual payment(s) waiting for review.</span>

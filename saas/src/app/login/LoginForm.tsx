@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { supabaseBrowser } from '@/lib/supabase/browser';
 
-export function LoginForm({ next, signupsOpen }: { next: string; signupsOpen: boolean }) {
+export function LoginForm({ next, signupsOpen, emailLogin }: { next: string; signupsOpen: boolean; emailLogin: boolean }) {
   const [email, setEmail] = useState('');
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [msg, setMsg] = useState('');
@@ -26,13 +26,18 @@ export function LoginForm({ next, signupsOpen }: { next: string; signupsOpen: bo
   }
 
   if (state === 'sent')
-    return <div className="alert good" role="status">Check your inbox — we sent a sign-in link to <strong>{email}</strong>.</div>;
+    return (
+      <div className="alert good" role="status">
+        Check your inbox — we sent a sign-in link to <strong>{email}</strong>. Open it in this same browser.
+      </div>
+    );
 
   return (
     <div className="stack">
       <button className="btn" type="button" onClick={google} style={{ width: '100%' }}>
         Continue with Google
       </button>
+      {emailLogin && (
       <form onSubmit={magic} className="stack">
         <div>
           <label className="lbl" htmlFor="email">Email</label>
@@ -43,6 +48,7 @@ export function LoginForm({ next, signupsOpen }: { next: string; signupsOpen: bo
         </button>
         {state === 'error' && <div className="alert bad" role="alert">{msg}</div>}
       </form>
+      )}
     </div>
   );
 }
