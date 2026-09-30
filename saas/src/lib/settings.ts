@@ -45,6 +45,7 @@ export const settingsSchemas = {
     lemonsqueezy: z.boolean().default(true),
     paddle: z.boolean().default(false),
     signups: z.boolean().default(true),
+    emailLogin: z.boolean().default(true),
   }),
 };
 

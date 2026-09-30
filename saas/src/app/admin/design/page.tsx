@@ -13,6 +13,7 @@ const FEATURE_LABELS: Record<string, string> = {
   lemonsqueezy: 'Lemon Squeezy card checkout',
   paddle: 'Paddle card checkout',
   signups: 'New sign-ups open',
+  emailLogin: 'Email sign-in links (needs custom SMTP for customers)',
 };
 
 export default async function DesignAdmin() {
